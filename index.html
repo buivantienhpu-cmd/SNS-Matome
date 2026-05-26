@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNS Matome | まとめ - Tổng hợp xu hướng SNS Nhật Bản</title>
     <script>
+      // Smart Auto-Redirect for GitHub Pages to prevent blank screen due to missing trailing slash
+      if (
+        window.location.hostname.includes('.github.io') && 
+        window.location.pathname.replace(/\/$/, '') === '/SNS-Matome' && 
+        !window.location.pathname.endsWith('/')
+      ) {
+        window.location.replace(window.location.origin + window.location.pathname + '/' + window.location.search + window.location.hash);
+      }
+
       window.addEventListener('error', function(event) {
         console.error("Global captured error:", event);
         var errDiv = document.getElementById('debug-err-div') || document.createElement('div');
