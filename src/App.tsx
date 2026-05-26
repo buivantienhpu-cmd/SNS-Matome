@@ -18,7 +18,6 @@ import {
   Instagram
 } from 'lucide-react';
 import { Post, CategoryFilter, PlatformFilter, SortOption } from './types';
-import PRESET_POSTS from '../public/data/posts.json';
 
 // Fallback initial data for ultimate presentation bulletproofing
 const BACKUP_POSTS: Post[] = [
@@ -175,8 +174,8 @@ const BACKUP_POSTS: Post[] = [
 ];
 
 export default function App() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [posts, setPosts] = useState<Post[]>(BACKUP_POSTS);
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorStatus, setErrorStatus] = useState<string | null>(null);
   
   // Filtering & Sorting State
@@ -220,8 +219,8 @@ export default function App() {
     } catch (err: any) {
       clearTimeout(timeoutId);
       console.warn("Could not fetch ./data/posts.json dynamically, loading backup presets:", err.message || err);
-      // Fail-safe load directly from bundled static JSON file
-      setPosts(PRESET_POSTS as unknown as Post[]);
+      // Fail-safe load directly from bundled static JSON file or standard presets
+      setPosts(BACKUP_POSTS);
       setErrorStatus("プリセットデータ使用中（クロール未実行 or ネットワーク制限）");
     } finally {
       setLoading(false);

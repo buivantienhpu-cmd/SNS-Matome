@@ -4,6 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNS Matome | まとめ - Tổng hợp xu hướng SNS Nhật Bản</title>
+    <script>
+      window.addEventListener('error', function(event) {
+        console.error("Global captured error:", event);
+        var errDiv = document.getElementById('debug-err-div') || document.createElement('div');
+        errDiv.id = 'debug-err-div';
+        errDiv.style.position = 'fixed';
+        errDiv.style.top = '0';
+        errDiv.style.left = '0';
+        errDiv.style.width = '100%';
+        errDiv.style.height = '100%';
+        errDiv.style.backgroundColor = '#FFF5F5';
+        errDiv.style.color = '#E60012';
+        errDiv.style.padding = '24px';
+        errDiv.style.zIndex = '999999';
+        errDiv.style.fontFamily = 'monospace';
+        errDiv.style.fontSize = '14px';
+        errDiv.style.overflow = 'auto';
+        errDiv.innerHTML = '<h2>🚨 JavaScript Execution Error:</h2>' +
+          '<p><b>Message:</b> ' + event.message + '</p>' +
+          '<p><b>Source:</b> ' + event.filename + ':' + event.lineno + ':' + event.colno + '</p>' +
+          '<p><b>Stack:</b></p><pre style="background: #FFF; padding: 12px; border: 1px solid #FFD8D8; border-radius: 4px; overflow-x: auto;">' + (event.error ? event.error.stack : 'No stack details available') + '</pre>';
+        document.body.appendChild(errDiv);
+      });
+      window.addEventListener('unhandledrejection', function(event) {
+        console.error("Global captured promise rejection:", event);
+        var errDiv = document.getElementById('debug-err-div') || document.createElement('div');
+        errDiv.id = 'debug-err-div';
+        errDiv.style.position = 'fixed';
+        errDiv.style.top = '0';
+        errDiv.style.left = '0';
+        errDiv.style.width = '100%';
+        errDiv.style.height = '100%';
+        errDiv.style.backgroundColor = '#FFF5F5';
+        errDiv.style.color = '#E60012';
+        errDiv.style.padding = '24px';
+        errDiv.style.zIndex = '999998';
+        errDiv.style.fontFamily = 'monospace';
+        errDiv.style.fontSize = '14px';
+        errDiv.style.overflow = 'auto';
+        errDiv.innerHTML = '<h2>🚨 Unhandled Promise Rejection:</h2>' +
+          '<p><b>Reason:</b> ' + event.reason + '</p>' +
+          '<pre style="background: #FFF; padding: 12px; border: 1px solid #FFD8D8; border-radius: 4px; overflow-x: auto;">' + (event.reason && event.reason.stack ? event.reason.stack : 'No stack details available') + '</pre>';
+        document.body.appendChild(errDiv);
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
