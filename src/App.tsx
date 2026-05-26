@@ -201,8 +201,10 @@ export default function App() {
     }, 3000);
 
     try {
-      // Fetch dynamic posts with abort signal control
-      const response = await fetch('./data/posts.json', { signal: controller.signal });
+      // Fetch dynamic posts with abort signal control relative to Vite's environment base URL
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+      const response = await fetch(`${cleanBase}data/posts.json`, { signal: controller.signal });
       clearTimeout(timeoutId);
       
       if (!response.ok) {
