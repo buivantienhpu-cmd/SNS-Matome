@@ -52,6 +52,22 @@ jobs:
             echo "No viral posts data changes detected. Skipping release commit."
           else
             git commit -m "chore: auto-update SNS hot trends posts.json [skip ci]"
-            git push origin HEAD:${{ github.ref }}
-            echo "Successfully committed and pushed updated posts.json to branch."
+            
+            # Use pull --rebase and a retry loop to confidently handle race conditions
+            success=false
+            for i in {1..3}; do
+              echo "Attempt $i: Pulling, rebasing, and pushing to branch..."
+              if git pull --rebase origin HEAD && git push origin HEAD:${{ github.ref }}; then
+                echo "Successfully committed and pushed updated posts.json to branch."
+                success=true
+                break
+              fi
+              echo "Push failed. Waiting 5 seconds before retrying..."
+              sleep 5
+            done
+            
+            if [ "$success" = false ]; then
+              echo "Error: Failed to push posts.json updates after 3 attempts."
+              exit 1
+            fi
           fi
