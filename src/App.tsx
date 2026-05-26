@@ -202,7 +202,7 @@ export default function App() {
 
     try {
       // Fetch dynamic posts with abort signal control
-      const response = await fetch('/data/posts.json', { signal: controller.signal });
+      const response = await fetch('./data/posts.json', { signal: controller.signal });
       clearTimeout(timeoutId);
       
       if (!response.ok) {
@@ -217,7 +217,7 @@ export default function App() {
       }
     } catch (err: any) {
       clearTimeout(timeoutId);
-      console.warn("Could not fetch /data/posts.json dynamically, loading backup presets:", err.message || err);
+      console.warn("Could not fetch ./data/posts.json dynamically, loading backup presets:", err.message || err);
       // Fail-safe load directly from bundled static JSON file
       setPosts(PRESET_POSTS as unknown as Post[]);
       setErrorStatus("プリセットデータ使用中（クロール未実行 or ネットワーク制限）");
