@@ -1,0 +1,6 @@
+{
+  "name": "SNS Matome",
+  "description": "SNS Matome: Web app tự động quét các mạng xã hội SNS đang hot tại Nhật, lọc bài đang viral và hiển thị trên homepage dạng list gọn gàng, tối giản kiểu Nhật.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
